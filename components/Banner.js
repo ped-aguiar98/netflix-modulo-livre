@@ -7,29 +7,25 @@ import { InformationCircleIcon, PlayIcon } from '@heroicons/react/20/solid';
 function Banner(netflixOriginals) {
     const [movie, setMovie] = useState(null)
 
-    // console.log(netflixOriginals)
-    // console.log('length', netflixOriginals.netflixOriginals[0])
 
     useEffect(() => {
         setMovie(netflixOriginals.netflixOriginals[Math.floor(Math.random() * netflixOriginals.netflixOriginals.length)])
     }, [netflixOriginals])
 
-    console.log(movie)
-    console.log(movie?.backdrop_path)
 
     return (
         <div>
             <div>
-                <div className='abolute top-0 left-0 -z-10 h-[95vh] w-full'>
+                <div className='abolute top-0 left-0  h-[95vh] w-full'>
                     {movie ?<Image src={`${baseUrl}${movie?.backdrop_path || movie?.poster_path}`}
                     alt='movie banner'
                     fill
-                    style={{ objectFit: 'cover'}}/> : <div></div>}
+                    style={{ objectFit: 'cover'}}/> : <div className='bg-black'></div>}
                 </div>
-                <div className='absolute top-[30%] space-y-2 md:space-y-4 lg:h-[65vh]'>
+                <div className='absolute top-44 space-y-2 md:space-y-4 lg:h-[65vh]'>
                     <div className='space-y-2 md:space-y-4'>
-                        <h1 className='z-10 font-bold text-2xl lg:text-7xl md:text-4xl'>{movie ? movie?.title || movie?.name : 'loading'}</h1>
-                        <p className='z-10 max-w-xs text-xs md:max-w-lg md:text-lg lg:max-w-2xl lg:text-2xl'>{movie ? movie?.overview : 'loading'}</p>
+                        <h1 className=' font-bold text-2xl lg:text-7xl md:text-4xl'>{movie ? movie?.title || movie?.name : 'loading'}</h1>
+                        <p className=' max-w-xs text-xs md:max-w-lg md:text-lg lg:max-w-2xl lg:text-2xl'>{movie ? movie?.overview : 'loading'}</p>
                     </div>
                     <div className='flex space-x-3'>
                         <button className='bannerButton bg-white text-black'><PlayIcon className='text-black h-4 w-4 md:h-7 md:w-7'/>Assistir</button>
@@ -37,8 +33,6 @@ function Banner(netflixOriginals) {
                     </div>
                 </div>
             </div>
-            {/* <h1 className='z-10'>{movie ? movie?.title || movie?.name : 'loading'}</h1>
-            <p className='z-10'>{movie ? movie?.overview : 'loading'}</p> */}
         </div>
     )
 }
