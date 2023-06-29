@@ -11,7 +11,7 @@ function Thumbnail({movie}) {
         }`}
         className="rounded-sm object-cover md:rounded"
         fill
-        alt='thumbnail'
+        alt='movie thumbnail'
       />
     </div>
   )

@@ -35,7 +35,7 @@ export default function Home({
       <Header />
       <main className='relative pl-4 pb-24 lg:space-y-24 lg:pl-16 overflow-x-hidden'>
         <Banner netflixOriginals={netflixOriginals} />
-        <section className=''>
+        <section className='md:space-y-24'>
           <Row title="Trending Now" movies={trendingNow} />
           <Row title="Top Rated" movies={topRated} />
           <Row title="Action Thrillers" movies={actionMovies} />
@@ -71,14 +71,14 @@ export const getServerSideProps = async () => {
     romanceMovies,
     documentaries,
   ] = await Promise.all([
-    fetch(requests.fetchNetflixOriginals, { timeout: 20000 }).then((res) => res.json()),
-    fetch(requests.fetchTrending, { timeout: 20000 }).then((res) => res.json()),
-    fetch(requests.fetchTopRated, { timeout: 20000 }).then((res) => res.json()),
-    fetch(requests.fetchActionMovies, { timeout: 20000 }).then((res) => res.json()),
-    fetch(requests.fetchComedyMovies, { timeout: 20000 }).then((res) => res.json()),
-    fetch(requests.fetchHorrorMovies, { timeout: 20000 }).then((res) => res.json()),
-    fetch(requests.fetchRomanceMovies, { timeout: 20000 }).then((res) => res.json()),
-    fetch(requests.fetchDocumentaries, { timeout: 20000 }).then((res) => res.json()),
+    fetch(requests.fetchNetflixOriginals, { timeout: 10000 }).then((res) => res.json()),
+    fetch(requests.fetchTrending, { timeout: 10000 }).then((res) => res.json()),
+    fetch(requests.fetchTopRated, { timeout: 10000 }).then((res) => res.json()),
+    fetch(requests.fetchActionMovies, { timeout: 10000 }).then((res) => res.json()),
+    fetch(requests.fetchComedyMovies, { timeout: 10000 }).then((res) => res.json()),
+    fetch(requests.fetchHorrorMovies, { timeout: 10000 }).then((res) => res.json()),
+    fetch(requests.fetchRomanceMovies, { timeout: 10000 }).then((res) => res.json()),
+    fetch(requests.fetchDocumentaries, { timeout: 10000 }).then((res) => res.json()),
   ])
 
   return {
