@@ -1,6 +1,7 @@
 import { BellIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 
 export default function Header(){
     //Adiciona um estado a barra de rolagem
@@ -30,7 +31,7 @@ export default function Header(){
         //Se a coordenada da barra de rolagem for diferente de 0 o bg ficará preto
         <header className={`${isScrolled && 'bg-[#141414]'}`}>
             <div className="flex items-center space-x-2 md:space-x-10"> 
-                <img
+                <Image
                     src="/netflix-name-logo.png"
                     width={100}
                     height={100}
