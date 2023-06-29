@@ -1,63 +1,40 @@
-import { BellIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
+import { baseUrl } from '@/constants/movie'
+import { InformationCircleIcon, PlayIcon } from '@heroicons/react/20/solid';
 
-export default function Banner(){
-    //Adiciona um estado a barra de rolagem
-    const [isScrolled, setIsScrolled] = useState(false)
+
+function Banner(netflixOriginals) {
+    const [movie, setMovie] = useState(null)
+
 
     useEffect(() => {
-        //Funçao para barra de rolagem
-        const handleScroll = () => {
-            //Se a coordenada da barra for maior que 0
-          if (window.scrollY > 0) {
-            //Estado da rolagem é verdadeiro
-            setIsScrolled(true)
-          } else {
-            //Estado da rolagem é falso
-            setIsScrolled(false)
-          }
-        }
-        //Adicionando um evento a barra de rolagem
-        window.addEventListener('scroll', handleScroll)
+        setMovie(netflixOriginals.netflixOriginals[Math.floor(Math.random() * netflixOriginals.netflixOriginals.length)])
+    }, [netflixOriginals])
 
-        return () => {
-            window.removeEventListener('scroll', handleScroll)
-          }
-    }, [])    
 
-    return(
-        //Se a coordenada da barra de rolagem for diferente de 0 o bg ficará preto
-        <header className={`${isScrolled && 'bg-[#141414]'}`}>
-            <div className="flex items-center space-x-2 md:space-x-10"> 
-                <img
-                    src="/netflix-name-logo.png"
-                    width={100}
-                    height={100}
-                    className="cursor-pointer object-contain"
-                />
-                <ul className="hidden md:flex md:flex-row">
-                    <li className="headerLink cursor-default font-semibold text-white hover:text-white">Início</li>
-                    <li className="headerLink">Filmes</li>
-                    <li className="headerLink">Séries</li>
-                    <li className="headerLink">Popular</li>
-                    <li className="headerLink">Minha Lista</li>
-                </ul>
+    return (
+        <div>
+            <div>
+                <div className='abolute top-0 left-0  h-[95vh] w-full'>
+                    {movie ?<Image src={`${baseUrl}${movie?.backdrop_path || movie?.poster_path}`}
+                    alt='movie banner'
+                    fill
+                    style={{ objectFit: 'cover'}}/> : <div className='bg-black'></div>}
+                </div>
+                <div className='absolute top-44 space-y-2 md:space-y-4 lg:h-[65vh]'>
+                    <div className='space-y-2 md:space-y-4'>
+                        <h1 className=' font-bold text-2xl lg:text-7xl md:text-4xl'>{movie ? movie?.title || movie?.name : 'loading'}</h1>
+                        <p className=' max-w-xs text-xs md:max-w-lg md:text-lg lg:max-w-2xl lg:text-2xl'>{movie ? movie?.overview : 'loading'}</p>
+                    </div>
+                    <div className='flex space-x-3'>
+                        <button className='bannerButton bg-white text-black'><PlayIcon className='text-black h-4 w-4 md:h-7 md:w-7'/>Assistir</button>
+                        <button className='bannerButton bg-[gray]/70'><InformationCircleIcon className='h-5 w-5 md:h-8 md:w-8'/>Mais informações</button>
+                    </div>
+                </div>
             </div>
-            
-
-            <div className="flex items-center space-x-4 text-sm font-light">
-                <MagnifyingGlassIcon className="hidden h-6 w-6 sm:inline"/>
-                <p className="hidden lg:inline">Kids</p>
-                <BellIcon className="h-6 w-6" />
-                <Link href={"/account"}>
-                    <img
-                        src="/profile.png"
-                        alt=""
-                        className="cursor-pointer rounded"
-                    />
-                </Link>
-            </div>
-        </header>
+        </div>
     )
 }
+
+export default Banner
