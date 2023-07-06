@@ -1,8 +1,26 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
 import Thumbnail from "./Thumbnail"
+import { useRef, useState } from "react"
 
 export default function Row({title, movies}){
     console.log('title', title)
+    const rowRef = useRef(null)
+    const [isMoved, setIsMoved] = useState(false)
+
+    const handleClick = (direction) => {
+        setIsMoved(true)
+
+        if(rowRef.current){
+          const {scrollLeft, clientWidth} = rowRef.current
+
+          const scrollTo = 
+          direction === "left" 
+            ? scrollLeft - clientWidth
+            : scrollLeft + clientWidth
+          rowRef.current.scrollTo({left: scrollTo, behavior: "smooth"})
+        }
+    }
+
     return(
         <div className="h-40 space-y-0.5 md:space-y-3 relative">
             <h2 className="w-56 absolute -top-6 cursor-pointer text-sm font-semibold
@@ -12,10 +30,12 @@ export default function Row({title, movies}){
             </h2>
             <div className="group relative md:-ml-2">
                 <ChevronLeftIcon 
-                className="absolute top-0 bottom-0 left-2 z-40 m-auto h-9 w-9
-                cursor-pointer opacity-0 transition hover:scale-125 group-hover:opacity-100"/>
+                className={`absolute top-0 bottom-0 left-2 z-40 m-auto h-9 w-9
+                cursor-pointer opacity-0 transition hover:scale-125  ${isMoved ? 'group-hover:opacity-100' : 'group-hover:opacity-0'}`}
+                onClick={() => handleClick("left")}
+                />
                 
-                <div className="flex items-center space-x-0.5 overflow-x-scroll md:space-x-2.5
+                <div ref={rowRef} className="flex items-center space-x-0.5 overflow-x-scroll md:space-x-2.5
                 md:p-2 scrollbar-hide">
                     {movies.map((movie) => (
                         <Thumbnail key={movie.id} movie={movie}/>
@@ -23,7 +43,9 @@ export default function Row({title, movies}){
                 </div>
                 
                 <ChevronRightIcon className="absolute top-0 bottom-0 right-2 z-40 m-auto h-9 w-9
-                cursor-pointer opacity-0 transition hover:scale-125 group-hover:opacity-100"/>
+                cursor-pointer opacity-0 transition hover:scale-125 group-hover:opacity-100"
+                onClick={() => handleClick("right")}
+                />
             </div>
         </div>
     )
