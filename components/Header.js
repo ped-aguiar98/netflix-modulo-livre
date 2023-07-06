@@ -30,19 +30,19 @@ export default function Header(){
     return(
         //Se a coordenada da barra de rolagem for diferente de 0 o bg ficará preto
         <header className={`${isScrolled && 'bg-[#141414]'}`}>
-            <div className="flex items-center space-x-2 md:space-x-10"> 
+            <div className="flex items-center lg:pl-11 space-x-2 md:space-x-10"> 
                 <Image
                     src="/netflix-name-logo.png"
                     width={100}
                     height={100}
                     className="cursor-pointer object-contain"
                 />
-                <ul className="hidden md:flex md:flex-row">
-                    <li className="headerLink cursor-default font-semibold text-white hover:text-white">Início</li>
-                    <li className="headerLink">Filmes</li>
-                    <li className="headerLink">Séries</li>
-                    <li className="headerLink">Popular</li>
-                    <li className="headerLink">Minha Lista</li>
+                <ul className="hidden space-x-4 md:flex md:flex-row">
+                    <li className="text-xl headerLink cursor-default font-semibold text-white hover:text-white">Início</li>
+                    <li className="text-xl headerLink">Filmes</li>
+                    <li className="text-xl headerLink">Séries</li>
+                    <li className="text-xl headerLink">Popular</li>
+                    <li className="text-xl headerLink">Minha Lista</li>
                 </ul>
             </div>
             

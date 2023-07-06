@@ -4,7 +4,7 @@
 
 @layer base{
   body{
-    @apply bg-[#09090b] text-white;
+    @apply bg-[#09090b] text-white !scrollbar-none md:!scrollbar-thin !scrollbar-track-transparent !scrollbar-thumb-red-600;
   }
 
   section::-webkit-scrollbar{
