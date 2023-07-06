@@ -18,13 +18,14 @@ export default function Home({
   topRated,
   trendingNow
  }) {
-  console.log(actionMovies)
-  console.log(comedyMovies)
-  console.log(documentaries)
-  console.log(horrorMovies)
-  console.log(romanceMovies)
-  console.log(topRated)
-  console.log(trendingNow)
+  //console.log(netflixOriginals)
+  //console.log(actionMovies)
+  //console.log(comedyMovies)
+  //console.log(documentaries)
+  //console.log(horrorMovies)
+  //console.log(romanceMovies)
+  //console.log(topRated)
+  //console.log(trendingNow)
   return (
     <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh]">
       <Head>
@@ -32,7 +33,7 @@ export default function Home({
         <link rel='icon' href='/netflix-icon.png'></link>
       </Head>
 
-      <Header />
+      <Header/>
       <main className='relative pl-4 pb-24 lg:space-y-24 lg:pl-16 overflow-x-hidden'>
         <Banner netflixOriginals={netflixOriginals} />
         <section className='md:space-y-24'>
@@ -91,7 +92,6 @@ export const getServerSideProps = async () => {
       horrorMovies: horrorMovies.results,
       romanceMovies: romanceMovies.results,
       documentaries: documentaries.results,
-      // products,
     },
   }
 }

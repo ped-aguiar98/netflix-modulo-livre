@@ -1,7 +1,8 @@
 import { BellIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import Image from 'next/image'
+import Search from './Search.js'
 
 export default function Header(){
     //Adiciona um estado a barra de rolagem
@@ -27,6 +28,8 @@ export default function Header(){
           }
     }, [])    
 
+
+
     return(
         //Se a coordenada da barra de rolagem for diferente de 0 o bg ficará preto
         <header className={`${isScrolled && 'bg-[#141414]'}`}>
@@ -38,17 +41,18 @@ export default function Header(){
                     className="cursor-pointer object-contain"
                 />
                 <ul className="hidden md:flex md:flex-row">
-                    <li className="headerLink cursor-default font-semibold text-white hover:text-white">Início</li>
-                    <li className="headerLink">Filmes</li>
-                    <li className="headerLink">Séries</li>
-                    <li className="headerLink">Popular</li>
+                    <Link href="/"><li className="headerLink  font-semibold text-white hover:text-white">Início</li></Link>
+                    <Link href="/genre?genre=filmes"><li className="headerLink">Filmes</li></Link>
+                    <Link href="/genre?genre=tv"><li className="headerLink">Séries</li></Link>
+                    <Link href="/genre?genre=trending"><li className="headerLink">Popular</li></Link>
                     <li className="headerLink">Minha Lista</li>
                 </ul>
             </div>
             
 
             <div className="flex items-center space-x-4 text-sm font-light">
-                <MagnifyingGlassIcon className="hidden h-6 w-6 sm:inline"/>
+                <Search/>
+                {/*<MagnifyingGlassIcon className="hidden h-6 w-6 sm:inline"/>*/}
                 <p className="hidden lg:inline">Kids</p>
                 <BellIcon className="h-6 w-6" />
                 <Link href={"/account"}>

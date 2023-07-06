@@ -2,7 +2,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
 import Thumbnail from "./Thumbnail"
 
 export default function Row({title, movies}){
-    console.log('title', title)
+    //console.log('title', title)
     return(
         <div className="h-40 space-y-0.5 md:space-y-3 relative">
             <h2 className="w-56 absolute -top-6 cursor-pointer text-sm font-semibold
