@@ -1,6 +1,6 @@
-import { BellIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
+import { BellIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
-import { use, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Search from './Search.js'
 
@@ -29,7 +29,6 @@ export default function Header(){
     }, [])    
 
 
-
     return(
         //Se a coordenada da barra de rolagem for diferente de 0 o bg ficará preto
         <header className={`${isScrolled && 'bg-[#141414]'}`}>
@@ -39,6 +38,9 @@ export default function Header(){
                     width={100}
                     height={100}
                     className="cursor-pointer object-contain"
+                    priority={true}
+                    style={{ width: "auto", height: "auto" }}
+                    alt=''
                 />
                 <ul className="hidden md:flex md:flex-row">
                     <Link href="/"><li className="headerLink  font-semibold text-white hover:text-white">Início</li></Link>

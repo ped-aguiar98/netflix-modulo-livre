@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { baseUrl } from '@/constants/movie'
-import { InformationCircleIcon, PlayIcon } from '@heroicons/react/20/solid';
-
+import { InformationCircleIcon, PlayIcon } from '@heroicons/react/solid';
 
 function Banner(netflixOriginals) {
     const [movie, setMovie] = useState(null)
@@ -19,7 +18,7 @@ function Banner(netflixOriginals) {
                 <div className="absolute top-0 left-0 -z-10 h-[95vh] w-screen">
                     <Image
                     src={`${baseUrl}${movie?.backdrop_path || movie?.poster_path}`}
-                    fill
+                    fill={true}
                     style={{ objectFit: 'cover'}}
                     alt='movie banner'
                     />
@@ -29,9 +28,9 @@ function Banner(netflixOriginals) {
                         <h1 className=' font-bold text-2xl lg:text-7xl md:text-4xl'>{movie ? movie?.title || movie?.name : 'loading'}</h1>
                         <p className=' max-w-xs text-xs md:max-w-lg md:text-lg lg:max-w-2xl lg:text-2xl'>{movie ? movie?.overview : 'loading'}</p>
                     </div> */}
-                <h1 className="text-2xl font-bold md:text-4xl lg:text-7xl">
+                <h2 className="text-2xl font-bold md:text-4xl lg:text-7xl">
                     {movie?.title || movie?.name || movie?.original_name}
-                </h1>
+                </h2>
                 <p className="max-w-xs text-xs text-shadow-md md:max-w-lg md:text-lg lg:max-w-2xl lg:text-2xl">
                     {movie?.overview}
                 </p>

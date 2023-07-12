@@ -1,63 +1,88 @@
+import Banner from "@/components/Banner";
+import Filter from "@/components/Filter";
 import Header from "@/components/Header";
 import fetchData from "@/utils/fetchdata";
 import Head from "next/head";
 import { useRouter } from 'next/router';
 import { useEffect, useState } from "react";
 
-
-export default function Genre(){
+export default function Genre() {
     const router = useRouter();
-    const { genre } = router.query;
-    
-    const [movies,setMovies] = useState([])
+    const query = router.query;
+    const genre = query.genre
+    const searchValue = query.search
+    console.log(router)
+
+    const [list, setList] = useState([])
+    const [movie,setMovies] = useState([])
+    const [search, setSearch] = useState('')
 
     useEffect(() => {
         fetchData()
             .then((result) => {
-                console.log(result)
-                switch(genre){
-                    case 'filmes': 
-                        setMovies(result.movies);
-                        break;
-                    case 'tv': setMovies(result.tv)
-                        break;
-                    case 'trending': setMovies(result.trendingNow)
-                        break;
+                setSearch('')
+                if (genre) {
+                    switch (genre) {
+                        case 'filmes':
+                            setList(result.movies);
+                            break;
+                        case 'tv': setList(result.tv)
+                            break;
+                        case 'trending': setList(result.trendingNow)
+                            break;
+                    }
+                }
+                else if (searchValue && searchValue != '') {
+                    setMovies(result)
+                    setSearch(searchValue)
                 }
             })
             .catch((error) => {
                 console.log(error);
             });
-    }, [genre])
+    }, [query])
 
-    console.log(movies)
-    
     return (
         <div>
             <div className="h-[50px]">
-               <Head>
-                <title>Netflix</title>
-                <link rel='icon' href='/netflix-icon.png'></link>
+                <Head>
+                    <title>Netflix</title>
+                    <link rel='icon' href='/netflix-icon.png'></link>
                 </Head>
-                <Header/> 
+                <Header />
             </div>
-            
-            <div className="m-4 grid lg:grid-cols-5 gap-x-4 gap-y-4 sm:grid-cols-4 grid-cols-2">
-               {   
-            movies.map((movie) => {
-                return(
-                    <div className="">
-                         <img src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}`}
-                                className="grid row-start-6 items-center"
-                                alt=''/>
-                    </div>
-                   
+
+            {search != '' ? (
+                <section className='mt-[100px]'>
+                    <Filter searchValue={search} gender={movie.movies} />
+                    <Filter searchValue={search} gender={movie.tv} />
+                    <Filter searchValue={search} gender={movie.netflixOriginals} />
+                </section>
+            ) :
+                (
+                    <section>
+                        <h1 className="m-5 px-3 text-2xl font-bold md:text-4xl lg:text-3xl ">{genre}</h1>
+                        <Banner netflixOriginals={list} />
+
+                        <div className="m-4 grid lg:grid-cols-5 gap-x-4 gap-y-4 sm:grid-cols-4 grid-cols-2">
+                            {
+                                list.map((movie) => {
+                                    return (
+                                        <div key={movie.key} className="">
+                                            <img src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}`}
+                                                className="grid row-start-6 items-center"
+                                                alt='' />
+                                        </div>
+
+                                    )
+                                })
+                            }
+                        </div>
+                    </section>
+
                 )
-            })
-            } 
-            </div>
-            
-            
+            }
+
         </div>
     )
 }
