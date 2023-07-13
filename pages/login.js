@@ -68,7 +68,7 @@ function Login () {
                                 className=" w-full p-2 bg-[#e2e8f0] rounded-md placeholder-[#6b7280] text-black outline-none focus:bg-[#6b7280]"
                                 {...register('password', { required: true })}
                                 />
-                                {errors.password && ( <p className="p-1 text-[13px] font-light  text-orange-500">A senha deve ter entre 4 e 60 caracteres.</p>)
+                                {errors.password && ( <p className="p-1 text-[13px] font-light  text-orange-500">A senha deve ter entre 6 e 60 caracteres.</p>)
                                 }
                         </label>
                     </div>

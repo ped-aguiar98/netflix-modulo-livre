@@ -32,7 +32,7 @@ export default function Header(){
     return(
         //Se a coordenada da barra de rolagem for diferente de 0 o bg ficará preto
         <header className={`${isScrolled && 'bg-[#141414]'}`}>
-            <div className="flex items-center space-x-2 md:space-x-10"> 
+            <div className="flex items-center lg:pl-11 space-x-2 md:space-x-10"> 
                 <Image
                     src="/netflix-name-logo.png"
                     width={100}
