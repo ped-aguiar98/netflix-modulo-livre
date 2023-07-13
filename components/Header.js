@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Search from './Search.js'
+import BasicMenu from './BasicMenu.js'
 
 export default function Header(){
     //Adiciona um estado a barra de rolagem
@@ -42,6 +43,8 @@ export default function Header(){
                     style={{ width: "auto", height: "auto" }}
                     alt=''
                 />
+
+                <BasicMenu/>
 
 
                 <ul className="hidden md:flex md:flex-row">

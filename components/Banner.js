@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { baseUrl } from '@/constants/movie'
 import { InformationCircleIcon, PlayIcon } from '@heroicons/react/solid';
+import { useRecoilState } from 'recoil';
+import { modalState, movieState } from '@/atoms/modalAtom';
 
 function Banner(netflixOriginals) {
     const [movie, setMovie] = useState(null)
+    const [showModal, setShowModal] = useRecoilState(modalState)
+    const [currentMovie, setCurrentMovie] = useRecoilState(movieState)
 
 
     useEffect(() => {
@@ -35,8 +39,17 @@ function Banner(netflixOriginals) {
                     {movie?.overview}
                 </p>
                 <div className='flex space-x-3'>
-                    <button className='bannerButton bg-white text-black'><PlayIcon className='text-black h-4 w-4 md:h-7 md:w-7'/>Assistir</button>
-                    <button className='bannerButton bg-[gray]/70'><InformationCircleIcon className='h-5 w-5 md:h-8 md:w-8'/>Mais informações</button>
+                    <button className='bannerButton bg-white text-black'><PlayIcon className='text-black h-4 w-4 md:h-7 md:w-7'/>
+                        Assistir
+                    </button>
+                    <button className='bannerButton bg-[gray]/70' onClick={() =>{
+                        setCurrentMovie(movie)
+                        setShowModal(true)
+                        console.log(showModal)
+                        console.log(movie)
+                    }}><InformationCircleIcon className='h-5 w-5 md:h-8 md:w-8'/>
+                        Mais informações
+                    </button>
                 </div>
                 {/* </div> */}
             </div>

@@ -12,6 +12,10 @@ import payments from '@/lib/stripe'
 import { getProducts } from '@stripe/firestore-stripe-payments'
 import useSubscription from '@/hooks/useSubscription'
 import useAuth from '@/hooks/useAuth'
+import { useRecoilValue } from 'recoil'
+import { modalState, movieState } from '@/atoms/modalAtom'
+import Modal from '../components/Modal'
+import useList from '@/hooks/useList'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -33,6 +37,9 @@ export default function Home({
   const subcription = useSubscription(user)
   const router = useRouter()
   const [query, setQuery] = useState(null)
+  const showModal = useRecoilValue(modalState)
+  const movie = useRecoilValue(movieState)
+  const list = useList(user?.uid)
 
   useEffect(() => {
     if (subcription) {
@@ -71,12 +78,13 @@ export default function Home({
               <Row title="Top Rated" movies={topRated} />
               <Row title="Action Thrillers" movies={actionMovies} />
               {/* My List Component */}
-              {/* {list.length > 0 && <Row title="My List" movies={list} />} */}
+              {list.length > 0 && <Row title="My List" movies={list} />}
               <Row title="Comedies" movies={comedyMovies} />
               <Row title="Scary Movies" movies={horrorMovies} />
               <Row title="Romance Movies" movies={romanceMovies} />
               <Row title="Documentaries" movies={documentaries} />
             </section>
+            <Modal />
           </main>
         )
       }
