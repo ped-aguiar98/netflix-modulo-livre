@@ -42,6 +42,8 @@ export default function Header(){
                     style={{ width: "auto", height: "auto" }}
                     alt=''
                 />
+
+
                 <ul className="hidden md:flex md:flex-row">
                     <Link href="/"><li className="headerLink  font-semibold text-white hover:text-white">Início</li></Link>
                     <Link href="/genre?genre=filmes"><li className="headerLink">Filmes</li></Link>

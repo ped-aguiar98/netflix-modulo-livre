@@ -13,7 +13,7 @@ export default function Account(products) {
     const { user, logout } = useAuth()
     const subscription = useSubscription(user)
     return (
-        <div className="bg-white">
+        <div className="bg-white h-full">
             <Head>
                 <title>Conta</title>
                 <link rel='icon' href='/netflix-icon.png'></link>
@@ -62,7 +62,7 @@ export default function Account(products) {
                         }
                     </div>
                     <p className="cursor-pointer text-blue-500 hover:underline md:text-right">
-                        Mude de plano
+                        Mudar de plano
                     </p>
                 </div>
 
