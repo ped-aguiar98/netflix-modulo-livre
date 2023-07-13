@@ -52,7 +52,7 @@ export default function Header(){
                     <Link href="/genre?genre=filmes"><li className="headerLink">Filmes</li></Link>
                     <Link href="/genre?genre=tv"><li className="headerLink">Séries</li></Link>
                     <Link href="/genre?genre=trending"><li className="headerLink">Popular</li></Link>
-                    <li className="headerLink">Minha Lista</li>
+                    <Link href="/Mylist"><li className="headerLink">Minha Lista</li></Link>
                 </ul>
             </div>
             

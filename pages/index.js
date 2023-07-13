@@ -65,9 +65,7 @@ export default function Home({
 
       {query != '' && query != null ? (
         <section className='mt-[100px]'>
-          <Filter searchValue={query} gender={movies} />
-          <Filter searchValue={query} gender={tv} />
-          <Filter searchValue={query} gender={netflixOriginals} />
+          <Filter searchValue={query} gender={[movies,tv,netflixOriginals,actionMovies,comedyMovies,documentaries,horrorMovies,romanceMovies,topRated,trendingNow]} />
         </section>
       ) :
         (
