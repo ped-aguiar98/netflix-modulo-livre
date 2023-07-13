@@ -1,19 +1,44 @@
+import Genre from "@/pages/genre";
 import { useEffect, useState } from "react";
 
 export default function Filter({searchValue, gender}){
 
+    const [differentId,setDifferentId] = useState([])
     const [filter, setFilter] = useState([])
 
     useEffect(() => {
 
         if (searchValue !== " ") {
-            const filtered = filterMovies(gender);
-            setFilter(filtered)
+            const filteredId = FilterId(gender)
+            setDifferentId(filteredId)                    
         }
-        else {setFilter([])}
+        else {setDifferentId([])}
 
     }, [searchValue, gender]);
 
+    useEffect(() => {
+
+        if(differentId != []){
+            const filtered = filterMovies(differentId);
+        console.log(filtered)
+        setFilter(filtered)
+        }
+        
+    },[differentId])
+
+
+    const FilterId = (movies)=> {
+        let array = []
+        movies.forEach((genero) => {
+            genero.forEach((item) => {
+                const index = array.findIndex(movie => movie.id === item.id)
+                if(index == -1){ array.push(item)}
+                
+            })
+        })
+        console.log(array)
+        return array
+    }
     
     const filterMovies = (movies) => {
         return movies.filter((movie) => {
@@ -26,10 +51,6 @@ export default function Filter({searchValue, gender}){
             return false
         });
     };
-
-    //console.log(gender)
-    //console.log(searchValue)
-    //console.log(filter)
 
     return (
         <div className="m-4 grid lg:grid-cols-5 gap-x-2 gap-y-12 sm:grid-cols-4 grid-cols-2">
